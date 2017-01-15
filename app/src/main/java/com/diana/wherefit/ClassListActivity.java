@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class ListActivity extends AppCompatActivity {
+public class ClassListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_class_list);
 
         Intent intent = getIntent();
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
@@ -19,7 +19,7 @@ public class ListActivity extends AppCompatActivity {
         textView.setTextSize(40);
         textView.setText(message);
 
-        ViewGroup layout = (ViewGroup) findViewById(R.id.activity_list);
+        ViewGroup layout = (ViewGroup) findViewById(R.id.activity_class_list);
         layout.addView(textView);
     }
 }

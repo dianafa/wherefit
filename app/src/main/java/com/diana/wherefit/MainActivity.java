@@ -15,9 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showAll(View view) {
-        Intent intent = new Intent(this, ListActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.button_all);
-        //String message = editText.getText().toString();
+        Intent intent = new Intent(this, ClassListActivity.class);
         String message = "dianka";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
