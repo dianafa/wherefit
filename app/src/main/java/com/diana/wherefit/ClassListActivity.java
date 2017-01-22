@@ -14,12 +14,15 @@ import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Collections;
+import java.util.List;
 
 public class ClassListActivity extends AppCompatActivity {
 
     private ListView listView;
 
     private Gson gson = new Gson();
+    private Places places;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,9 @@ public class ClassListActivity extends AppCompatActivity {
 
         Reader reader = new InputStreamReader(getResources().openRawResource(R.raw.activities));
         final SportActivities activities = gson.fromJson(reader, SportActivities.class);
-
+        reader = new InputStreamReader(getResources().openRawResource(R.raw.places));
+        this.places = gson.fromJson(reader, Places.class);
+        Collections.sort(activities.getActivities());
         ArrayAdapter<SportActivity> adapter = new ArrayAdapter<SportActivity>(this, android.R.layout.simple_list_item_2, android.R.id.text1, activities.getActivities()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -39,7 +44,8 @@ public class ClassListActivity extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
                 SportActivity activity = (SportActivity) listView.getItemAtPosition(position);
                 text1.setText(activity.getHeader());
-                text2.setText(activity.getPlaceId());
+                Place place = places.getForId(activity.getPlaceId());
+                text2.setText(place.getName());
                 return view;
             }
         };
