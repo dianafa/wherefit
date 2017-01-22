@@ -1,6 +1,5 @@
 package com.diana.wherefit;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,11 +11,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
+import com.google.gson.Gson;
+
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassListActivity extends AppCompatActivity {
-    ListView listView ;
+
+    private ListView listView;
+
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +31,13 @@ public class ClassListActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.list);
 
-        List<String> objList = Arrays.asList(
-                "Zumba",
-                "ABT",
-                "Body Shape",
-                "Tabata",
-                "Trampoliny",
-                "Pump",
-                "TBC",
-                "Joga",
-                "Stretching"
-        );
+        Reader reader = new InputStreamReader(getResources().openRawResource(R.raw.activities));
+        SportActivities activities = gson.fromJson(reader, SportActivities.class);
+
+        List<String> objList = new ArrayList<>();
+        for (SportActivity activity : activities.getActivities()) {
+            objList.add(activity.getName());
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, android.R.id.text1, objList) {
             @Override
@@ -45,7 +47,7 @@ public class ClassListActivity extends AppCompatActivity {
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
 
                 text1.setText("a");
-                text2.setText("b");
+                text2.setText((String) listView.getItemAtPosition(position));
                 return view;
             }
         };
@@ -65,7 +67,7 @@ public class ClassListActivity extends AppCompatActivity {
 
                 // Show Alert
                 Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
                         .show();
 
             }
