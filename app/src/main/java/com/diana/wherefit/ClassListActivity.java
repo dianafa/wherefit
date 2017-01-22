@@ -2,6 +2,7 @@ package com.diana.wherefit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.Collections;
-import java.util.List;
 
 public class ClassListActivity extends AppCompatActivity {
 
@@ -38,7 +39,7 @@ public class ClassListActivity extends AppCompatActivity {
         Collections.sort(activities.getActivities());
         ArrayAdapter<SportActivity> adapter = new ArrayAdapter<SportActivity>(this, android.R.layout.simple_list_item_2, android.R.id.text1, activities.getActivities()) {
             @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 TextView text1 = (TextView) view.findViewById(android.R.id.text1);
                 TextView text2 = (TextView) view.findViewById(android.R.id.text2);
@@ -54,20 +55,12 @@ public class ClassListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // ListView Clicked item index
-                int itemPosition = position;
+                SportActivity activity = (SportActivity) listView.getItemAtPosition(position);
 
-                // ListView Clicked item value
-                /*String itemValue = (String) listView.getItemAtPosition(position);
-
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                        .show();*/
-
+                //Show Alert
+                Toast.makeText(getApplicationContext(), activity.getName() , Toast.LENGTH_LONG).show();
             }
 
         });
