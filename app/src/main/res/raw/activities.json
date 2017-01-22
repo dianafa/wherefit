@@ -1,31 +1,58 @@
 {
   "activities": [
     {
-      "name": "Zumba"
+      "name": "Zumba",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "ABT"
+      "name": "ABT",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "Body Shape"
+      "name": "Body Shape",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "Tabata"
+      "name": "Tabata",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "Trampoliny"
+      "name": "Trampoliny",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "Pump"
+      "name": "Pump",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "TBC"
+      "name": "TBC",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "Joga"
+      "name": "Joga",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     },
     {
-      "name": "Stretching"
+      "name": "Stretching",
+      "startTime": 1485105634758,
+      "endTime": 1485105634758,
+      "placeId": 1
     }
   ]
 }
