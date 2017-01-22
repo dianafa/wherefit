@@ -1,4 +1,4 @@
-package com.diana.wherefit;
+package com.diana.wherefit.pojo;
 
 import android.support.annotation.NonNull;
 

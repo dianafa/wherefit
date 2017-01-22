@@ -1,4 +1,4 @@
-package com.diana.wherefit;
+package com.diana.wherefit.pojo;
 
 import java.io.Serializable;
 import java.util.List;

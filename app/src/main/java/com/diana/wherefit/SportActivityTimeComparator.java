@@ -1,5 +1,7 @@
 package com.diana.wherefit;
 
+import com.diana.wherefit.pojo.SportActivity;
+
 import java.util.Comparator;
 
 public class SportActivityTimeComparator implements Comparator<SportActivity> {
