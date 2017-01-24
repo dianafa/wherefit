@@ -1,6 +1,7 @@
 package com.diana.wherefit.pojo;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 public class Places implements Serializable {
@@ -9,6 +10,10 @@ public class Places implements Serializable {
 
     public List<Place> getPlaces() {
         return places;
+    }
+
+    public Places() {
+        places = Collections.emptyList();
     }
 
     public Place getForId(int id) {

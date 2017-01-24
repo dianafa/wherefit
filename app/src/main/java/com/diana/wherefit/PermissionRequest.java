@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
 
 public final class PermissionRequest {
 
@@ -19,10 +18,7 @@ public final class PermissionRequest {
             } else {
                 requestPermission(activity, permission, requestCode);
             }
-        } else {
-            Toast.makeText(activity, "Permission (already) Granted!", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private static void showExplanation(final Activity activity, String title, String message, final String permission,
