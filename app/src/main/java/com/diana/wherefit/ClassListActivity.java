@@ -31,7 +31,7 @@ public class ClassListActivity extends AppCompatActivity {
 
     private SportActivitiesService activitiesService;
 
-    private static final float DEFAULT_DISTANCE = 1000f; //meters
+    private static final float DEFAULT_DISTANCE = 10_000f; //in meters (10km)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
