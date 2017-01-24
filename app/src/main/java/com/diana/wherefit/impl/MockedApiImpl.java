@@ -1,17 +1,21 @@
-package com.diana.wherefit.api;
+package com.diana.wherefit.impl;
 
 import android.content.Context;
 import android.location.Location;
 
 import com.diana.wherefit.R;
+import com.diana.wherefit.api.SportActivityApi;
+import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.Places;
 import com.diana.wherefit.pojo.SportActivities;
+import com.diana.wherefit.pojo.SportActivity;
 import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Collection;
 
-public class MockedApiImpl implements Api {
+public class MockedApiImpl implements SportActivityApi {
 
     private static final Gson GSON = new Gson();
 
@@ -26,12 +30,12 @@ public class MockedApiImpl implements Api {
     }
 
     @Override
-    public SportActivities getActivities(Location location) {
-        return activities;
+    public Collection<SportActivity> getActivities() {
+        return activities.getActivities();
     }
 
     @Override
-    public Places getPlaces(Location location) {
-        return places;
+    public Place getPlace() {
+        return places.getPlaces().get(0);
     }
 }

@@ -1,6 +1,10 @@
 package com.diana.wherefit.pojo;
 
+import android.location.Location;
+import android.location.LocationManager;
+
 import java.io.Serializable;
+import java.util.Locale;
 
 public class Place implements Serializable {
 
@@ -8,9 +12,9 @@ public class Place implements Serializable {
 
     private String name;
 
-    private String latitude;
+    private double latitude;
 
-    private String longitude;
+    private double longitude;
 
     public int getId() {
         return id;
@@ -20,11 +24,18 @@ public class Place implements Serializable {
         return name;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
+    }
+
+    public Location getLocation() {
+        Location location = new Location(LocationManager.GPS_PROVIDER);
+        location.setLatitude(getLatitude());
+        location.setLongitude(getLongitude());
+        return location;
     }
 }

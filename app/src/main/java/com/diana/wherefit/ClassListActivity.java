@@ -11,25 +11,33 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.diana.wherefit.api.Api;
-import com.diana.wherefit.api.MockedApiImpl;
+import com.diana.wherefit.impl.MockedApiImpl;
+import com.diana.wherefit.api.SportActivitiesService;
+import com.diana.wherefit.impl.SportActivitiesServiceImpl;
+import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.Places;
 import com.diana.wherefit.pojo.SportActivities;
+import com.diana.wherefit.pojo.SportActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 public class ClassListActivity extends AppCompatActivity {
 
     private Location location;
 
-    private Api api;
+    private SportActivitiesService activitiesService;
+
+    private static final float DEFAULT_DISTANCE = 1000f; //meters
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        api = new MockedApiImpl(this);
+        activitiesService = new SportActivitiesServiceImpl();
+        activitiesService.addApi(new MockedApiImpl(this));
         setContentView(R.layout.activity_class_list);
 
         Intent intent = getIntent();
@@ -53,21 +61,21 @@ public class ClassListActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            initSportActivities(api, location);
+            initSportActivities(activitiesService, location);
         }
     }
 
-    private void initSportActivities(Api api, Location loc) {
-        Places places;
-        SportActivities activities;
+    private void initSportActivities(SportActivitiesService service, Location loc) {
+        Collection<Place> places;
+        List<SportActivity> activities;
         Location location = loc;
         if (loc == null) {
             location = (getDefaultLocation());
         }
-        if (api != null) {
-            places = api.getPlaces(location);
-            activities = api.getActivities(location);
-            Collections.sort(activities.getActivities());
+        if (service != null) {
+            places = service.getPlaces(location, DEFAULT_DISTANCE);
+            activities = service.getActivities(location, DEFAULT_DISTANCE);
+            Collections.sort(activities);
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(new SportActivityArrayAdapter(this, activities, places));
             listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView));

@@ -8,16 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.diana.wherefit.pojo.Place;
-import com.diana.wherefit.pojo.Places;
-import com.diana.wherefit.pojo.SportActivities;
 import com.diana.wherefit.pojo.SportActivity;
+
+import java.util.Collection;
+import java.util.List;
 
 public class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
 
-    private final Places places;
+    private final Collection<Place> places;
 
-    public SportActivityArrayAdapter(Context context, SportActivities activities, Places places) {
-        super(context, android.R.layout.simple_list_item_2, android.R.id.text1, activities.getActivities());
+    public SportActivityArrayAdapter(Context context, List<SportActivity> activities, Collection<Place> places) {
+        super(context, android.R.layout.simple_list_item_2, android.R.id.text1, activities);
         this.places = places;
     }
 
@@ -30,11 +31,22 @@ public class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
         SportActivity activity = getItem(position);
         if (activity != null) {
             text1.setText(activity.getHeader());
-            Place place = places.getForId(activity.getPlaceId());
+            Place place = getForId(activity.getPlaceId());
             if (place != null) {
                 text2.setText(place.getName());
             }
         }
         return view;
+    }
+
+    private Place getForId(int id) {
+        Place place = null;
+        for (Place p : places) {
+            if (p.getId() == id) {
+                place = p;
+                break;
+            }
+        }
+        return place;
     }
 }

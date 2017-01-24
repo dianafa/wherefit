@@ -15,15 +15,4 @@ public class Places implements Serializable {
     public Places() {
         places = Collections.emptyList();
     }
-
-    public Place getForId(int id) {
-        Place place = null;
-        for (Place p: places) {
-            if (p.getId() == id) {
-                place = p;
-                break;
-            }
-        }
-        return place;
-    }
 }
