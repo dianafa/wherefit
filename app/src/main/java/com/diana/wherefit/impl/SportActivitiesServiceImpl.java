@@ -11,7 +11,6 @@ import com.diana.wherefit.pojo.SportActivity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.ServiceLoader;
 
 public class SportActivitiesServiceImpl implements SportActivitiesService {
 
@@ -22,17 +21,13 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     public SportActivitiesServiceImpl() {
         apis = new ArrayList<>();
         places = new SparseArray<>();
-        ServiceLoader<SportActivityApi> load = ServiceLoader.load(SportActivityApi.class);
-        for (SportActivityApi api : load) {
-            apis.add(api);
-        }
     }
 
     @Override
     public List<SportActivity> getActivities(Location location, float dist) {
         List<SportActivity> nearbyActivities = new ArrayList<>();
         for (SportActivityApi api : apis) {
-            for (Place place: api.getPlaces()) {
+            for (Place place : api.getPlaces()) {
                 Location placeLocation = place.getLocation();
                 if (placeLocation != null && location != null) {
                     float distanceTo = placeLocation.distanceTo(location);
@@ -69,7 +64,7 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     @Override
     public void addApi(SportActivityApi activityApi) {
         apis.add(activityApi);
-        for (Place place: activityApi.getPlaces()) {
+        for (Place place : activityApi.getPlaces()) {
             places.put(place.getId(), place);
         }
     }

@@ -1,13 +1,11 @@
 package com.diana.wherefit.pojo;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class SportActivity implements Comparable<SportActivity>, Serializable {
+public class SportActivity implements Serializable {
 
     private static final String FORMAT = "hh:mm";
 
@@ -37,11 +35,6 @@ public class SportActivity implements Comparable<SportActivity>, Serializable {
 
     public String getHeader() {
         return getHour(startTime) + " - " + getHour(endTime) + " " + getName();
-    }
-
-    @Override
-    public int compareTo(@NonNull SportActivity o) {
-        return Long.compare(this.getStartTime(), o.getStartTime());
     }
 
     private String getHour(long time) {

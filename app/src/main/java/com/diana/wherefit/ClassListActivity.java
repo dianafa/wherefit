@@ -11,27 +11,28 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.diana.wherefit.impl.MockedApiImpl;
 import com.diana.wherefit.api.SportActivitiesService;
+import com.diana.wherefit.impl.MockedApiImpl;
 import com.diana.wherefit.impl.SportActivitiesServiceImpl;
-import com.diana.wherefit.pojo.Place;
-import com.diana.wherefit.pojo.Places;
-import com.diana.wherefit.pojo.SportActivities;
 import com.diana.wherefit.pojo.SportActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 public class ClassListActivity extends AppCompatActivity {
 
+    private static final float DEFAULT_DISTANCE = 10_000f; //in meters (10km)
     private Location location;
-
     private SportActivitiesService activitiesService;
 
-    private static final float DEFAULT_DISTANCE = 10_000f; //in meters (10km)
+    private static Location getDefaultLocation() {
+        Location location = new Location(LocationManager.GPS_PROVIDER);
+        location.setLatitude(52.4039071);
+        location.setLongitude(16.9500184);
+        return location;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,17 +74,10 @@ public class ClassListActivity extends AppCompatActivity {
         }
         if (service != null) {
             activities = service.getActivities(location, DEFAULT_DISTANCE);
-            Collections.sort(activities);
+            Collections.sort(activities, new SportActivityTimeComparator());
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(new SportActivityArrayAdapter(this, activities, service));
-            listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView));
+            listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView, service));
         }
-    }
-
-    private static Location getDefaultLocation(){
-        Location location = new Location(LocationManager.GPS_PROVIDER);
-        location.setLatitude(52.4039071);
-        location.setLongitude(16.9500184);
-        return location;
     }
 }
