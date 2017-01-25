@@ -1,7 +1,6 @@
 package com.diana.wherefit.impl;
 
 import android.content.Context;
-import android.location.Location;
 
 import com.diana.wherefit.R;
 import com.diana.wherefit.api.SportActivityApi;
@@ -35,7 +34,7 @@ public class MockedApiImpl implements SportActivityApi {
     }
 
     @Override
-    public Place getPlace() {
-        return places.getPlaces().get(0);
+    public Collection<Place> getPlaces() {
+        return places.getPlaces();
     }
 }

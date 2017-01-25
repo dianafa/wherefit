@@ -9,5 +9,5 @@ public interface SportActivityApi {
 
     Collection<SportActivity> getActivities();
 
-    Place getPlace();
+    Collection<Place> getPlaces();
 }

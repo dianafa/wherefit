@@ -13,5 +13,7 @@ public interface SportActivitiesService {
 
     List<Place> getPlaces(Location location, float dist);
 
+    Place getPlace(int id);
+
     void addApi(SportActivityApi activityApi);
 }

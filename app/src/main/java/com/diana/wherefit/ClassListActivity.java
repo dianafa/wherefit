@@ -66,18 +66,16 @@ public class ClassListActivity extends AppCompatActivity {
     }
 
     private void initSportActivities(SportActivitiesService service, Location loc) {
-        Collection<Place> places;
         List<SportActivity> activities;
         Location location = loc;
         if (loc == null) {
             location = (getDefaultLocation());
         }
         if (service != null) {
-            places = service.getPlaces(location, DEFAULT_DISTANCE);
             activities = service.getActivities(location, DEFAULT_DISTANCE);
             Collections.sort(activities);
             ListView listView = (ListView) findViewById(R.id.list);
-            listView.setAdapter(new SportActivityArrayAdapter(this, activities, places));
+            listView.setAdapter(new SportActivityArrayAdapter(this, activities, service));
             listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView));
         }
     }
