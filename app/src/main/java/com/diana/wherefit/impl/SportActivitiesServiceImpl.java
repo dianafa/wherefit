@@ -10,6 +10,7 @@ import com.diana.wherefit.pojo.SportActivity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class SportActivitiesServiceImpl implements SportActivitiesService {
@@ -54,6 +55,20 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
             }
         }
         return nearbyPlaces;
+    }
+
+    @Override
+    public Collection<String> getTypes() {
+        Collection<String> types = new HashSet<>();
+        for (SportActivityApi api : apis) {
+            for (SportActivity activity: api.getActivities()) {
+                String type = activity.getType();
+                if (type != null) {
+                    types.add(type);
+                }
+            }
+        }
+        return types;
     }
 
     @Override

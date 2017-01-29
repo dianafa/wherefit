@@ -17,6 +17,8 @@ public class SportActivity implements Serializable {
 
     private long endTime;
 
+    private String type;
+
     public String getName() {
         return name;
     }
@@ -39,5 +41,9 @@ public class SportActivity implements Serializable {
 
     private String getHour(long time) {
         return new SimpleDateFormat(FORMAT, Locale.getDefault()).format(new Date(time));
+    }
+
+    public String getType() {
+        return type;
     }
 }
