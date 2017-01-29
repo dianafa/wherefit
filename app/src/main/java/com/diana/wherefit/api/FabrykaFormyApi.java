@@ -1,16 +1,20 @@
 package com.diana.wherefit.api;
-import android.location.Location;
 
-import com.diana.wherefit.pojo.SportActivities;
+import com.diana.wherefit.pojo.Place;
+import com.diana.wherefit.pojo.SportActivity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
-public class FabrykaFormyApi {
+public class FabrykaFormyApi implements SportActivityApi {
     private final String url = "http://www.fabryka-formy.pl/kluby/poznan-galeria-posnania";
     private Document doc;
 
@@ -31,12 +35,52 @@ public class FabrykaFormyApi {
         }
     }
 
-    public SportActivities getActivities(Location location) {
-        return new SportActivities();
-    }
-
     public Elements getAllEventsElement() {
         return doc.select("#all-events");
     }
 
+    public Collection<SportActivity> getActivitiesForWeekday(int weekday) {
+        Elements allDays = doc.select(".tt_timetable ul.tt_items_list");
+        Element dayTable = allDays.get(weekday);
+
+        Elements activitiesTable = dayTable.select("li");
+        Collection<SportActivity> activities = new ArrayList<>();
+
+
+        for (Element activityElement: activitiesTable) {
+            String name = activityElement.select("span").first().html();
+            //String startTime = activityElement.select(".top_hour .hours").first().html();
+            //String endTime = activityElement.select(".bottom_hour .hours").first().html();
+            SportActivity a = new SportActivity(name, 2, getTimeFromString("string"), getTimeFromString("string"), "opis");
+            activities.add(a);
+        }
+
+        return activities;
+    }
+
+    public long getTimeFromString(String hour) {
+
+        return 54535L;
+    }
+
+    @Override
+    public Collection<SportActivity> getActivities() {
+        Elements activitiesDom = doc.select(".tt_timetable ul.tt_items_list li");
+        Collection<SportActivity> activities = new ArrayList<>();
+
+        for (Element activityElement: activitiesDom) {
+            String name = activityElement.select("span").first().html();
+            String startTime = activityElement.select(".top_hour .hours").first().html();
+            String endTime = activityElement.select(".bottom_hour .hours").first().html();
+            SportActivity a = new SportActivity(name, 2, getTimeFromString(startTime), getTimeFromString(endTime), "opis");
+            activities.add(a);
+        }
+
+        return activities;
+    }
+
+    @Override
+    public Collection<Place> getPlaces() {
+        return Collections.emptyList();
+    }
 }

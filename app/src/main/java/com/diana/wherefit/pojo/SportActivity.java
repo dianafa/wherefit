@@ -10,14 +10,23 @@ public class SportActivity implements Serializable {
     private static final String FORMAT = "hh:mm";
 
     private String name;
-
     private int placeId;
-
     private long startTime;
-
     private long endTime;
-
     private String type;
+    private String description;
+
+    public SportActivity() {
+        // empty
+    }
+
+    public SportActivity(String name, int placeId, long startTime, long endTime, String description) {
+        this.name = name;
+        this.placeId = placeId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -45,5 +54,9 @@ public class SportActivity implements Serializable {
 
     public String getType() {
         return type;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
