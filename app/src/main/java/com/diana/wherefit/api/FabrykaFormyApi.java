@@ -48,17 +48,22 @@ public class FabrykaFormyApi implements SportActivityApi {
 
 
         for (Element activityElement: activitiesTable) {
-            String name = activityElement.select("span").first().html();
-            //String startTime = activityElement.select(".top_hour .hours").first().html();
-            //String endTime = activityElement.select(".bottom_hour .hours").first().html();
-            SportActivity a = new SportActivity(name, 2, getTimeFromString("string"), getTimeFromString("string"), "opis");
-            activities.add(a);
+            activities.add(createSportActivityFromElement(activityElement));
         }
 
         return activities;
     }
 
-    public long getTimeFromString(String hour) {
+    public SportActivity createSportActivityFromElement(Element element) {
+        String name = element.select("span").first().html();
+        //String startTime = activityElement.select(".top_hour .hours").first().html();
+        //String endTime = activityElement.select(".bottom_hour .hours").first().html();
+        SportActivity a = new SportActivity(name, 2, getTimeFromString("string"), getTimeFromString("string"), "opis");
+
+        return a;
+    }
+
+    private long getTimeFromString(String hour) {
 
         return 54535L;
     }
@@ -69,11 +74,7 @@ public class FabrykaFormyApi implements SportActivityApi {
         Collection<SportActivity> activities = new ArrayList<>();
 
         for (Element activityElement: activitiesDom) {
-            String name = activityElement.select("span").first().html();
-            String startTime = activityElement.select(".top_hour .hours").first().html();
-            String endTime = activityElement.select(".bottom_hour .hours").first().html();
-            SportActivity a = new SportActivity(name, 2, getTimeFromString(startTime), getTimeFromString(endTime), "opis");
-            activities.add(a);
+            activities.add(createSportActivityFromElement(activityElement));
         }
 
         return activities;
