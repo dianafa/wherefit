@@ -2,6 +2,8 @@ package com.diana.wherefit;
 import com.diana.wherefit.api.FabrykaFormyApi;
 import com.diana.wherefit.pojo.SportActivity;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,5 +38,23 @@ public class FabrykaFormyApiTest {
 
         assertEquals(13, tuesdayActivities.size());
         assertEquals("Pilates", ((SportActivity)tuesdayActivities.toArray()[5]).getName());
+    }
+
+    @Test
+    public void createSportActivityFromElement1() {
+        String html = "<li class=\"timetable_clearfix icon_clock_black\"><span title=\"ABS\">ABS</span><div class=\"value\"><div class=\"befhr\"></div>08.00 - 08.30 </div></li>";
+        Element e = Jsoup.parse(html);
+        SportActivity a = ff.createSportActivityFromElement(e);
+
+        assertEquals("ABS", a.getName());
+    }
+
+    @Test
+    public void createSportActivityFromElement2() {
+        String html = "<li class=\"timetable_clearfix icon_clock_black\"><span title=\"ABS\">ABS</span><div class=\"value\"><div class=\"befhr\"></div>08.00 - 08.30 </div></li>";
+        Element e = Jsoup.parse(html);
+        SportActivity a = ff.createSportActivityFromElement(e);
+
+        assertEquals("ABS", a.getName());
     }
 }

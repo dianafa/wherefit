@@ -2,6 +2,7 @@ package com.diana.wherefit.api;
 
 import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.SportActivity;
+import com.diana.wherefit.pojo.Timeframe;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,6 +12,7 @@ import org.jsoup.select.Elements;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -56,16 +58,16 @@ public class FabrykaFormyApi implements SportActivityApi {
 
     public SportActivity createSportActivityFromElement(Element element) {
         String name = element.select("span").first().html();
-        //String startTime = activityElement.select(".top_hour .hours").first().html();
-        //String endTime = activityElement.select(".bottom_hour .hours").first().html();
-        SportActivity a = new SportActivity(name, 2, getTimeFromString("string"), getTimeFromString("string"), "opis");
+        String hoursString = element.select(".value").first().ownText();
+        Timeframe hours  = getTimesFromString(hoursString);
 
-        return a;
+        return new SportActivity(name, 2, hours.getStartDate(), hours.getEndDate(), "opis");
     }
 
-    private long getTimeFromString(String hour) {
+    private Timeframe getTimesFromString(String hours) {
+        Calendar today = Calendar.getInstance();
 
-        return 54535L;
+        return new Timeframe(today.getTimeInMillis(), hours, today.get(Calendar.DAY_OF_WEEK));
     }
 
     @Override
