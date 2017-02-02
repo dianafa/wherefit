@@ -42,6 +42,12 @@ public class Timeframe {
         end.add(Calendar.DAY_OF_WEEK, daysGap);
         start.set(Calendar.HOUR, Integer.parseInt(startHourString));
         end.set(Calendar.HOUR, Integer.parseInt(endHourString));
+        if (startMinuteString != null) {
+            start.set(Calendar.MINUTE, Integer.parseInt(startMinuteString));
+        }
+        if (endMinuteString != null) {
+            end.set(Calendar.MINUTE, Integer.parseInt(endMinuteString));
+        }
 
         startDate = start.getTimeInMillis();
         endDate = end.getTimeInMillis();
