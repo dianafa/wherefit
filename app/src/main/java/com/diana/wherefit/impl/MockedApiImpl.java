@@ -29,7 +29,7 @@ public class MockedApiImpl implements SportActivityApi {
     }
 
     @Override
-    public Collection<SportActivity> getActivities() {
+    public Collection<SportActivity> getActivities(long from, long to) {
         return activities.getActivities();
     }
 

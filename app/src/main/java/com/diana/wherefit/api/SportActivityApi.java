@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface SportActivityApi {
 
-    Collection<SportActivity> getActivities();
+    Collection<SportActivity> getActivities(long from, long to);
 
     Collection<Place> getPlaces();
 }

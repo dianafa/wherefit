@@ -18,6 +18,7 @@ import com.diana.wherefit.pojo.SportActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +38,10 @@ public class ClassListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activitiesService = new SportActivitiesServiceImpl();
+        Calendar now = Calendar.getInstance();
+        Calendar to = Calendar.getInstance();
+        to.add(Calendar.DAY_OF_MONTH, 1);
+        activitiesService = new SportActivitiesServiceImpl(now.getTimeInMillis(), to.getTimeInMillis());
         activitiesService.addApi(new MockedApiImpl(this));
         setContentView(R.layout.activity_class_list);
 

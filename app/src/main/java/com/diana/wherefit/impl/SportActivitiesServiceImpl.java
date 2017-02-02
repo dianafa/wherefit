@@ -19,7 +19,11 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
 
     private SparseArray<Place> places;
 
-    public SportActivitiesServiceImpl() {
+    private long from, to;
+
+    public SportActivitiesServiceImpl(long from, long to) {
+        this.from = from;
+        this.to = to;
         apis = new ArrayList<>();
         places = new SparseArray<>();
     }
@@ -27,14 +31,11 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     @Override
     public List<SportActivity> getActivities(Location location, float dist) {
         List<SportActivity> nearbyActivities = new ArrayList<>();
+        List<Place> places = getPlaces(location, dist);
         for (SportActivityApi api : apis) {
-            for (Place place : api.getPlaces()) {
-                Location placeLocation = place.getLocation();
-                if (placeLocation != null && location != null) {
-                    float distanceTo = placeLocation.distanceTo(location);
-                    if (distanceTo <= dist) {
-                        nearbyActivities.addAll(api.getActivities());
-                    }
+            for (SportActivity activity : api.getActivities(from, to)) {
+                if (isInPlaceNearby(activity, places)) {
+                    nearbyActivities.add(activity);
                 }
             }
         }
@@ -61,7 +62,7 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     public Collection<String> getTypes() {
         Collection<String> types = new HashSet<>();
         for (SportActivityApi api : apis) {
-            for (SportActivity activity: api.getActivities()) {
+            for (SportActivity activity : api.getActivities(from, to)) {
                 String type = activity.getType();
                 if (type != null) {
                     types.add(type);
@@ -82,5 +83,16 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
         for (Place place : activityApi.getPlaces()) {
             places.put(place.getId(), place);
         }
+    }
+
+    private boolean isInPlaceNearby(SportActivity activity, Collection<Place> nearbyPlaces) {
+        boolean result = false;
+        for (Place place : nearbyPlaces) {
+            if (place.getId() == activity.getPlaceId()) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 }

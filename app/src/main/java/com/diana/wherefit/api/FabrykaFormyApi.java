@@ -71,7 +71,7 @@ public class FabrykaFormyApi implements SportActivityApi {
     }
 
     @Override
-    public Collection<SportActivity> getActivities() {
+    public Collection<SportActivity> getActivities(long from, long to) {
         Elements activitiesDom = doc.select(".tt_timetable ul.tt_items_list li");
         Collection<SportActivity> activities = new ArrayList<>();
 
