@@ -38,10 +38,7 @@ public class ClassListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Calendar now = Calendar.getInstance();
-        Calendar to = Calendar.getInstance();
-        to.add(Calendar.DAY_OF_MONTH, 1);
-        activitiesService = new SportActivitiesServiceImpl(now.getTimeInMillis(), to.getTimeInMillis());
+        activitiesService = new SportActivitiesServiceImpl();
         activitiesService.addApi(new MockedApiImpl(this));
         setContentView(R.layout.activity_class_list);
 
@@ -77,7 +74,10 @@ public class ClassListActivity extends AppCompatActivity {
             location = (getDefaultLocation());
         }
         if (service != null) {
-            activities = service.getActivities(location, DEFAULT_DISTANCE);
+            Calendar now = Calendar.getInstance();
+            Calendar to = Calendar.getInstance();
+            to.add(Calendar.DAY_OF_MONTH, 1);
+            activities = service.getActivities(location, DEFAULT_DISTANCE, now.getTimeInMillis(), to.getTimeInMillis());
             Collections.sort(activities, new SportActivityTimeComparator());
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(new SportActivityArrayAdapter(this, activities, service));

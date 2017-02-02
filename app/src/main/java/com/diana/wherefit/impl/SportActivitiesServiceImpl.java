@@ -19,17 +19,13 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
 
     private SparseArray<Place> places;
 
-    private long from, to;
-
-    public SportActivitiesServiceImpl(long from, long to) {
-        this.from = from;
-        this.to = to;
+    public SportActivitiesServiceImpl() {
         apis = new ArrayList<>();
         places = new SparseArray<>();
     }
 
     @Override
-    public List<SportActivity> getActivities(Location location, float dist) {
+    public List<SportActivity> getActivities(Location location, float dist, long from, long to) {
         List<SportActivity> nearbyActivities = new ArrayList<>();
         List<Place> places = getPlaces(location, dist);
         for (SportActivityApi api : apis) {
@@ -59,7 +55,7 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     }
 
     @Override
-    public Collection<String> getTypes() {
+    public Collection<String> getTypes(long from, long to) {
         Collection<String> types = new HashSet<>();
         for (SportActivityApi api : apis) {
             for (SportActivity activity : api.getActivities(from, to)) {

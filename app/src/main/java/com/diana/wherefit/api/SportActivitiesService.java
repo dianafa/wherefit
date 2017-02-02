@@ -10,11 +10,11 @@ import java.util.List;
 
 public interface SportActivitiesService {
 
-    List<SportActivity> getActivities(Location location, float dist);
+    List<SportActivity> getActivities(Location location, float dist, long from, long to);
 
     List<Place> getPlaces(Location location, float dist);
 
-    Collection<String> getTypes();
+    Collection<String> getTypes(long from, long to);
 
     Place getPlace(int id);
 
