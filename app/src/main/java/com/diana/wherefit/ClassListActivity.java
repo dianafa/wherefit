@@ -1,6 +1,8 @@
 package com.diana.wherefit;
 
+import android.app.LoaderManager;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -11,8 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.diana.wherefit.api.FabrykaFormyApi;
 import com.diana.wherefit.api.SportActivitiesService;
-import com.diana.wherefit.impl.MockedApiImpl;
+import com.diana.wherefit.impl.DownloadSiteContent;
 import com.diana.wherefit.impl.SportActivitiesServiceImpl;
 import com.diana.wherefit.pojo.SportActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,7 +42,32 @@ public class ClassListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activitiesService = new SportActivitiesServiceImpl();
-        activitiesService.addApi(new MockedApiImpl(this));
+
+        getLoaderManager().initLoader(0, savedInstanceState,
+                new LoaderManager.LoaderCallbacks<FabrykaFormyApi>() {
+                    @Override public Loader<FabrykaFormyApi> onCreateLoader(int id, Bundle args) {
+                        return new DownloadSiteContent(ClassListActivity.this);
+                    }
+
+                    @Override public void onLoadFinished(Loader<FabrykaFormyApi> loader, FabrykaFormyApi data) {
+                        activitiesService.addApi(data);
+                        initView();
+                    }
+
+                    @Override public void onLoaderReset(Loader<FabrykaFormyApi> loader) {
+                        activitiesService.addApi(new FabrykaFormyApi());
+                        initView();
+                        //activitiesService.addApi(new MockedApiImpl(this));
+                    }
+                }
+        ).forceLoad();
+
+
+
+
+    }
+
+    private void initView() {
         setContentView(R.layout.activity_class_list);
 
         Intent intent = getIntent();
@@ -52,7 +80,6 @@ public class ClassListActivity extends AppCompatActivity {
         layout.addView(textView);
 
         initLocation();
-
     }
 
     private void initLocation() {
@@ -78,7 +105,7 @@ public class ClassListActivity extends AppCompatActivity {
             Calendar to = Calendar.getInstance();
             to.add(Calendar.DAY_OF_MONTH, 1);
             activities = service.getActivities(location, DEFAULT_DISTANCE, now.getTimeInMillis(), to.getTimeInMillis());
-            Collections.sort(activities, new SportActivityTimeComparator());
+            //Collections.sort(activities, new SportActivityTimeComparator());
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(new SportActivityArrayAdapter(this, activities, service));
             listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView, service));

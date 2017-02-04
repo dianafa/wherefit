@@ -1,5 +1,4 @@
 package com.diana.wherefit.api;
-
 import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.SportActivity;
 import com.diana.wherefit.pojo.Timeframe;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 
 public class FabrykaFormyApi implements SportActivityApi {
     private final String url = "http://www.fabryka-formy.pl/kluby/poznan-galeria-posnania";
@@ -61,7 +59,7 @@ public class FabrykaFormyApi implements SportActivityApi {
         String hoursString = element.select(".value").first().ownText();
         Timeframe hours  = getTimesFromString(hoursString);
 
-        return new SportActivity(name, 2, hours.getStartDate(), hours.getEndDate(), "opis");
+        return new SportActivity(name, 1, hours.getStartDate(), hours.getEndDate(), "opis");
     }
 
     private Timeframe getTimesFromString(String hours) {
@@ -84,6 +82,10 @@ public class FabrykaFormyApi implements SportActivityApi {
 
     @Override
     public Collection<Place> getPlaces() {
-        return Collections.emptyList();
+        ArrayList<Place> places = new ArrayList<>();
+
+        places.add(new Place(1, "Fabryka Formy - Posnania", 52.4039071, 16.9500184));
+
+        return places;
     }
 }
