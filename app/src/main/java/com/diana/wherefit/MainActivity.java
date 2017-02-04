@@ -91,10 +91,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public SportActivitiesService getAtivitiesService() {
-        return activitiesService;
-    }
-
     private void getLocationPermissions() {
         PermissionRequest.permissionCheck(this, Manifest.permission.ACCESS_COARSE_LOCATION, 0);
         PermissionRequest.permissionCheck(this, Manifest.permission.ACCESS_FINE_LOCATION, 1);

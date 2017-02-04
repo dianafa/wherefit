@@ -53,7 +53,15 @@ public class SportActivity implements Serializable {
     }
 
     public String getType() {
-        return type;
+        if (name.contains("AQUA")) {
+            return "Aquagym";
+        }
+
+        if (name.contains("Zumba")) {
+            return "Zumba";
+        }
+
+        return name;
     }
 
     public String getDescription() {

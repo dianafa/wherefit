@@ -14,7 +14,7 @@ public interface SportActivitiesService {
 
     List<Place> getPlaces(Location location, float dist);
 
-    Collection<String> getTypes(long from, long to);
+    List<String> getTypes(long from, long to);
 
     Place getPlace(int id);
 

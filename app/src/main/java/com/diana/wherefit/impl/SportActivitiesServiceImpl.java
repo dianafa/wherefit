@@ -10,8 +10,11 @@ import com.diana.wherefit.pojo.SportActivity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SportActivitiesServiceImpl implements SportActivitiesService {
 
@@ -61,8 +64,8 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     }
 
     @Override
-    public Collection<String> getTypes(long from, long to) {
-        Collection<String> types = new HashSet<>();
+    public List<String> getTypes(long from, long to) {
+        Set<String> types = new HashSet<>();
         for (SportActivityApi api : apis) {
             for (SportActivity activity : api.getActivities(from, to)) {
                 String type = activity.getType();
@@ -71,7 +74,11 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
                 }
             }
         }
-        return types;
+
+        ArrayList<String> typesList = new ArrayList<>(types);
+        Collections.sort(typesList);
+
+        return typesList;
     }
 
     @Override
