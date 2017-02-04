@@ -74,7 +74,10 @@ public class FabrykaFormyApi implements SportActivityApi {
         Collection<SportActivity> activities = new ArrayList<>();
 
         for (Element activityElement: activitiesDom) {
-            activities.add(createSportActivityFromElement(activityElement));
+            SportActivity activity = createSportActivityFromElement(activityElement);
+            if (activity.getStartTime() > from && activity.getEndTime() < to) {
+                activities.add(activity);
+            }
         }
 
         return activities;

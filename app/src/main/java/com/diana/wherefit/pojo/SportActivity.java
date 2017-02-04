@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class SportActivity implements Serializable {
 
-    private static final String FORMAT = "hh:mm";
+    private static final String FORMAT = "kk:mm";
 
     private String name;
     private int placeId;

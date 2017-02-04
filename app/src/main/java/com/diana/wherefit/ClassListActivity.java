@@ -96,16 +96,14 @@ public class ClassListActivity extends AppCompatActivity {
 
     private void initSportActivities(SportActivitiesService service, Location loc) {
         List<SportActivity> activities;
-        Location location = loc;
-        if (loc == null) {
-            location = (getDefaultLocation());
-        }
+        Location location = loc == null ? getDefaultLocation() : loc;
+
         if (service != null) {
             Calendar now = Calendar.getInstance();
             Calendar to = Calendar.getInstance();
-            to.add(Calendar.DAY_OF_MONTH, 1);
+            to.add(Calendar.DAY_OF_MONTH, 3); // 3 days ahead
             activities = service.getActivities(location, DEFAULT_DISTANCE, now.getTimeInMillis(), to.getTimeInMillis());
-            //Collections.sort(activities, new SportActivityTimeComparator());
+            Collections.sort(activities, new SportActivityTimeComparator());
             ListView listView = (ListView) findViewById(R.id.list);
             listView.setAdapter(new SportActivityArrayAdapter(this, activities, service));
             listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView, service));
