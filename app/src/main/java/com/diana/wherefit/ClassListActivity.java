@@ -33,7 +33,9 @@ public class ClassListActivity extends AppCompatActivity {
         getLocation();
 
         Bundle b = getIntent().getExtras();
-        types = b.getStringArrayList("types");
+        if (b != null) {
+            types = b.getStringArrayList("types");
+        }
 
         initSportActivities(SportActivitiesServiceImpl.getInstance(), location);
     }
