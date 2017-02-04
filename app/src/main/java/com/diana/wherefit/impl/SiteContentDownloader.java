@@ -5,9 +5,9 @@ import android.content.Context;
 
 import com.diana.wherefit.api.FabrykaFormyApi;
 
-public class DownloadSiteContent extends AsyncTaskLoader<FabrykaFormyApi> {
+public class SiteContentDownloader extends AsyncTaskLoader<FabrykaFormyApi> {
 
-    public DownloadSiteContent(Context context) {
+    public SiteContentDownloader(Context context) {
         super(context);
     }
 

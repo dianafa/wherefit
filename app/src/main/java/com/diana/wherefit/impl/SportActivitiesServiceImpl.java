@@ -15,6 +15,8 @@ import java.util.List;
 
 public class SportActivitiesServiceImpl implements SportActivitiesService {
 
+    private static SportActivitiesService instance = new SportActivitiesServiceImpl();
+
     private Collection<SportActivityApi> apis;
 
     private SparseArray<Place> places;
@@ -22,6 +24,10 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
     public SportActivitiesServiceImpl() {
         apis = new ArrayList<>();
         places = new SparseArray<>();
+    }
+
+    public static SportActivitiesService getInstance() {
+        return instance;
     }
 
     @Override
