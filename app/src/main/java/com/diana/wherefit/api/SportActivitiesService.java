@@ -5,12 +5,15 @@ import android.location.Location;
 import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.SportActivity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public interface SportActivitiesService {
 
     List<SportActivity> getActivities(Location location, float dist, long from, long to);
+
+    List<SportActivity> getActivitiesFromType(Location location, float dist, long from, long to, ArrayList<String> types);
 
     List<Place> getPlaces(Location location, float dist);
 

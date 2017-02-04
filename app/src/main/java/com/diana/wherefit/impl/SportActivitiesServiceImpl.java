@@ -11,7 +11,6 @@ import com.diana.wherefit.pojo.SportActivity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,6 +38,20 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
         List<Place> places = getPlaces(location, dist);
         for (SportActivityApi api : apis) {
             for (SportActivity activity : api.getActivities(from, to)) {
+                if (isInPlaceNearby(activity, places)) {
+                    nearbyActivities.add(activity);
+                }
+            }
+        }
+        return nearbyActivities;
+    }
+
+    @Override
+    public List<SportActivity> getActivitiesFromType(Location location, float dist, long from, long to, ArrayList<String> types) {
+        List<SportActivity> nearbyActivities = new ArrayList<>();
+        List<Place> places = getPlaces(location, dist);
+        for (SportActivityApi api : apis) {
+            for (SportActivity activity : api.getActivitiesFromType(from, to, types)) {
                 if (isInPlaceNearby(activity, places)) {
                     nearbyActivities.add(activity);
                 }

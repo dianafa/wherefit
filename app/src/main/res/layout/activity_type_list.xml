@@ -7,10 +7,20 @@
     android:orientation="vertical"
     tools:context="com.diana.wherefit.TypeListActivity">
 
+    <Button
+        android:id="@+id/gobutton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Go" />
+
     <ListView
         android:id="@+id/checkbox_list"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:choiceMode="multipleChoice"
+        android:layout_above="@id/gobutton"
+        android:layout_alignParentTop="true">
     </ListView>
 
 </LinearLayout>

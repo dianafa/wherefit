@@ -61,6 +61,10 @@ public class SportActivity implements Serializable {
             return "Zumba";
         }
 
+        if (name.toLowerCase().contains("cross")) {
+            return "Crossfit";
+        }
+
         return name;
     }
 

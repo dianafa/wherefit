@@ -84,10 +84,25 @@ public class FabrykaFormyApi implements SportActivityApi {
     }
 
     @Override
+    public Collection<SportActivity> getActivitiesFromType(long from, long to, ArrayList<String> types) {
+        Elements activitiesDom = doc.select(".tt_timetable ul.tt_items_list li");
+        Collection<SportActivity> activities = new ArrayList<>();
+
+        for (Element activityElement: activitiesDom) {
+            SportActivity activity = createSportActivityFromElement(activityElement);
+            if (activity.getStartTime() > from && activity.getEndTime() < to && types.contains(activity.getType())) {
+                activities.add(activity);
+            }
+        }
+
+        return activities;
+    }
+
+    @Override
     public Collection<Place> getPlaces() {
         ArrayList<Place> places = new ArrayList<>();
 
-        places.add(new Place(1, "Fabryka Formy - Posnania", 52.4039071, 16.9500184));
+        places.add(new Place(1, "Fabryka Formy - Posnania", 52.3971177, 16.9538029));
 
         return places;
     }

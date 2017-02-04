@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class MockedApiImpl implements SportActivityApi {
@@ -30,6 +31,11 @@ public class MockedApiImpl implements SportActivityApi {
 
     @Override
     public Collection<SportActivity> getActivities(long from, long to) {
+        return activities.getActivities();
+    }
+
+    @Override
+    public Collection<SportActivity> getActivitiesFromType(long from, long to, ArrayList<String> types) {
         return activities.getActivities();
     }
 
