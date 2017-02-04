@@ -36,10 +36,6 @@ public class FabrykaFormyApi implements SportActivityApi {
         }
     }
 
-    public Elements getAllEventsElement() {
-        return doc.select("#all-events");
-    }
-
     public Collection<SportActivity> getActivitiesForWeekday(int weekday) {
         Elements allDays = doc.select(".tt_timetable ul.tt_items_list");
         Element dayTable = allDays.get(weekday);
@@ -49,35 +45,38 @@ public class FabrykaFormyApi implements SportActivityApi {
 
 
         for (Element activityElement: activitiesTable) {
-            activities.add(createSportActivityFromElement(activityElement));
+            activities.add(createSportActivityFromElement(activityElement, weekday));
         }
 
         return activities;
     }
 
-    public SportActivity createSportActivityFromElement(Element element) {
+    public SportActivity createSportActivityFromElement(Element element, int weekday) {
         String name = element.select("span").first().html();
         String hoursString = element.select(".value").first().ownText();
-        Timeframe hours  = getTimesFromString(hoursString);
+        Timeframe hours  = getTimesFromString(hoursString, weekday);
 
         return new SportActivity(name, 1, hours.getStartDate(), hours.getEndDate(), "opis");
     }
 
-    private Timeframe getTimesFromString(String hours) {
+    private Timeframe getTimesFromString(String hours, int weekday) {
         Calendar today = Calendar.getInstance();
 
-        return new Timeframe(today.getTimeInMillis(), hours, today.get(Calendar.DAY_OF_WEEK));
+        return new Timeframe(today.getTimeInMillis(), hours, weekday);
     }
 
     @Override
     public Collection<SportActivity> getActivities(long from, long to) {
-        Elements activitiesDom = doc.select(".tt_timetable ul.tt_items_list li");
+        Elements daysElements = doc.select(".tt_timetable ul.tt_items_list");
         Collection<SportActivity> activities = new ArrayList<>();
 
-        for (Element activityElement: activitiesDom) {
-            SportActivity activity = createSportActivityFromElement(activityElement);
-            if (activity.getStartTime() > from && activity.getEndTime() < to) {
-                activities.add(activity);
+        for (int i = 0; i < daysElements.size(); i++) {
+            Elements activitiesDom = daysElements.get(i).select("li");
+            for (Element activityElement: activitiesDom) {
+                SportActivity activity = createSportActivityFromElement(activityElement, i);
+                if (activity.getStartTime() > from && activity.getEndTime() < to) {
+                    activities.add(activity);
+                }
             }
         }
 
@@ -86,13 +85,16 @@ public class FabrykaFormyApi implements SportActivityApi {
 
     @Override
     public Collection<SportActivity> getActivitiesFromType(long from, long to, ArrayList<String> types) {
-        Elements activitiesDom = doc.select(".tt_timetable ul.tt_items_list li");
+        Elements daysElements = doc.select(".tt_timetable ul.tt_items_list");
         Collection<SportActivity> activities = new ArrayList<>();
 
-        for (Element activityElement: activitiesDom) {
-            SportActivity activity = createSportActivityFromElement(activityElement);
-            if (activity.getStartTime() > from && activity.getEndTime() < to && types.contains(activity.getType())) {
-                activities.add(activity);
+        for (int i = 0; i < daysElements.size(); i++) {
+            Elements activitiesDom = daysElements.get(i).select("li");
+            for (Element activityElement: activitiesDom) {
+                SportActivity activity = createSportActivityFromElement(activityElement, i);
+                if (activity.getStartTime() > from && activity.getEndTime() < to && types.contains(activity.getType())) {
+                    activities.add(activity);
+                }
             }
         }
 

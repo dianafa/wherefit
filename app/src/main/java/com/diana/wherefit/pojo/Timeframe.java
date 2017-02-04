@@ -40,8 +40,8 @@ public class Timeframe {
 
         start.add(Calendar.DAY_OF_WEEK, daysGap);
         end.add(Calendar.DAY_OF_WEEK, daysGap);
-        start.set(Calendar.HOUR, Integer.parseInt(startHourString));
-        end.set(Calendar.HOUR, Integer.parseInt(endHourString));
+        start.set(Calendar.HOUR_OF_DAY, Integer.parseInt(startHourString));
+        end.set(Calendar.HOUR_OF_DAY, Integer.parseInt(endHourString));
         if (startMinuteString != null) {
             start.set(Calendar.MINUTE, Integer.parseInt(startMinuteString));
         }

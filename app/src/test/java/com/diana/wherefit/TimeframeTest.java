@@ -42,12 +42,12 @@ public class TimeframeTest {
 
             assertEquals(expectedStart.get(Calendar.MONTH), actualStart.get(Calendar.MONTH));
             assertEquals(expectedStart.get(Calendar.DAY_OF_MONTH), actualStart.get(Calendar.DAY_OF_MONTH));
-            assertEquals(expectedStart.get(Calendar.HOUR), actualStart.get(Calendar.HOUR));
+            assertEquals(expectedStart.get(Calendar.HOUR_OF_DAY), actualStart.get(Calendar.HOUR_OF_DAY));
             assertEquals(expectedStart.get(Calendar.MINUTE), actualStart.get(Calendar.MINUTE));
 
             assertEquals(expectedEnd.get(Calendar.MONTH), actualEnd.get(Calendar.MONTH));
             assertEquals(expectedEnd.get(Calendar.DAY_OF_MONTH), actualEnd.get(Calendar.DAY_OF_MONTH));
-            assertEquals(expectedEnd.get(Calendar.HOUR), actualEnd.get(Calendar.HOUR));
+            assertEquals(expectedEnd.get(Calendar.HOUR_OF_DAY), actualEnd.get(Calendar.HOUR_OF_DAY));
             assertEquals(expectedEnd.get(Calendar.MINUTE), actualEnd.get(Calendar.MINUTE));
 
             assertEquals(expectedStart.getTimeInMillis(),time.getStartDate());
@@ -87,12 +87,12 @@ public class TimeframeTest {
 
             assertEquals(expectedStart.get(Calendar.MONTH), actualStart.get(Calendar.MONTH));
             assertEquals(expectedStart.get(Calendar.DAY_OF_MONTH), actualStart.get(Calendar.DAY_OF_MONTH));
-            assertEquals(expectedStart.get(Calendar.HOUR), actualStart.get(Calendar.HOUR));
+            assertEquals(expectedStart.get(Calendar.HOUR_OF_DAY), actualStart.get(Calendar.HOUR_OF_DAY));
             assertEquals(expectedStart.get(Calendar.MINUTE), actualStart.get(Calendar.MINUTE));
 
             assertEquals(expectedEnd.get(Calendar.MONTH), actualEnd.get(Calendar.MONTH));
             assertEquals(expectedEnd.get(Calendar.DAY_OF_MONTH), actualEnd.get(Calendar.DAY_OF_MONTH));
-            assertEquals(expectedEnd.get(Calendar.HOUR), actualEnd.get(Calendar.HOUR));
+            assertEquals(expectedEnd.get(Calendar.HOUR_OF_DAY), actualEnd.get(Calendar.HOUR_OF_DAY));
             assertEquals(expectedEnd.get(Calendar.MINUTE), actualEnd.get(Calendar.MINUTE));
 
             assertEquals(expectedStart.getTimeInMillis(),time.getStartDate());

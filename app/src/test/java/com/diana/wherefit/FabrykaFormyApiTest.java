@@ -21,18 +21,6 @@ public class FabrykaFormyApiTest {
     }
 
     @Test
-    public void readActivitiesList() throws Exception {
-        int expectedActivitiesListCount = 1;
-
-        assertNotNull(ff);
-
-        Elements allEvents = ff.getAllEventsElement();
-
-        assertNotNull(allEvents);
-        assertEquals(expectedActivitiesListCount, allEvents.size());
-    }
-
-    @Test
     public void getActivitiesForWeekdayTest() {
         Collection<SportActivity> tuesdayActivities = ff.getActivitiesForWeekday(1);
 
@@ -44,7 +32,7 @@ public class FabrykaFormyApiTest {
     public void createSportActivityFromElement1() {
         String html = "<li class=\"timetable_clearfix icon_clock_black\"><span title=\"ABS\">ABS</span><div class=\"value\"><div class=\"befhr\"></div>08.00 - 08.30 </div></li>";
         Element e = Jsoup.parse(html);
-        SportActivity a = ff.createSportActivityFromElement(e);
+        SportActivity a = ff.createSportActivityFromElement(e, 1);
 
         assertEquals("ABS", a.getName());
     }
@@ -53,7 +41,7 @@ public class FabrykaFormyApiTest {
     public void createSportActivityFromElement2() {
         String html = "<li class=\"timetable_clearfix icon_clock_black\"><span title=\"ABS\">ABS</span><div class=\"value\"><div class=\"befhr\"></div>08.00 - 08.30 </div></li>";
         Element e = Jsoup.parse(html);
-        SportActivity a = ff.createSportActivityFromElement(e);
+        SportActivity a = ff.createSportActivityFromElement(e, 1);
 
         assertEquals("ABS", a.getName());
     }

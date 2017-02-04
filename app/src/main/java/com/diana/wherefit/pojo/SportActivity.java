@@ -13,7 +13,6 @@ public class SportActivity implements Serializable {
     private int placeId;
     private long startTime;
     private long endTime;
-    private String type;
     private String description;
 
     public SportActivity() {
