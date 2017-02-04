@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     public void showAll(View view) {
         getLocationPermissions();
         Intent intent = new Intent(this, ClassListActivity.class);
+        startActivity(intent);
+    }
+
+    public void showTypeSelection(View view) {
+        getLocationPermissions();
+        Intent intent = new Intent(this, TypeListActivity.class);
         String message = "dianka";
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);

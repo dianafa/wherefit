@@ -56,15 +56,11 @@ public class ClassListActivity extends AppCompatActivity {
 
                     @Override public void onLoaderReset(Loader<FabrykaFormyApi> loader) {
                         activitiesService.addApi(new FabrykaFormyApi());
-                        initView();
                         //activitiesService.addApi(new MockedApiImpl(this));
+                        initView();
                     }
                 }
         ).forceLoad();
-
-
-
-
     }
 
     private void initView() {
