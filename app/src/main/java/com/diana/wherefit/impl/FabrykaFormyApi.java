@@ -1,4 +1,5 @@
-package com.diana.wherefit.api;
+package com.diana.wherefit.impl;
+import com.diana.wherefit.api.SportActivityApi;
 import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.SportActivity;
 import com.diana.wherefit.pojo.Timeframe;

@@ -1,5 +1,5 @@
 package com.diana.wherefit;
-import com.diana.wherefit.api.FabrykaFormyApi;
+import com.diana.wherefit.impl.FabrykaFormyApi;
 import com.diana.wherefit.pojo.SportActivity;
 
 import org.jsoup.Jsoup;

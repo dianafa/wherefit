@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.diana.wherefit.api.FabrykaFormyApi;
+import com.diana.wherefit.impl.FabrykaFormyApi;
 import com.diana.wherefit.api.SportActivitiesService;
 import com.diana.wherefit.impl.SiteContentDownloader;
 import com.diana.wherefit.impl.SportActivitiesServiceImpl;
