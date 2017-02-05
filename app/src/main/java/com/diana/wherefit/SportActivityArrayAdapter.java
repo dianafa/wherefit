@@ -1,6 +1,7 @@
 package com.diana.wherefit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +30,18 @@ class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
         View view = super.getView(position, convertView, parent);
         TextView text1 = (TextView) view.findViewById(android.R.id.text1);
         TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
         SportActivity activity = getItem(position);
         if (activity != null) {
-            text1.setText(activity.getHeader(getLocale()));
+            String hex = Integer.toHexString(activity.getDay() * 2);
+            view.setBackgroundColor(Color.parseColor("#D0" + "9" + hex + hex + "F" + hex + "F"));
+
+            text1.setText(activity.getHeader());
             Place place = service.getPlace(activity.getPlaceId());
             if (place != null) {
                 text2.setText(place.getName());
             }
         }
         return view;
-    }
-
-    private Locale getLocale() {
-        return getContext().getResources().getConfiguration().locale;
     }
 }
