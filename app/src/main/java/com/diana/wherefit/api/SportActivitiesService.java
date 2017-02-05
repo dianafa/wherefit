@@ -11,9 +11,7 @@ import java.util.List;
 
 public interface SportActivitiesService {
 
-    List<SportActivity> getActivities(Location location, float dist, long from, long to);
-
-    List<SportActivity> getActivitiesFromType(Location location, float dist, long from, long to, ArrayList<String> types);
+    List<SportActivity> getActivities(Location location, float dist, long from, long to, Collection<String> types);
 
     List<Place> getPlaces(Location location, float dist);
 
