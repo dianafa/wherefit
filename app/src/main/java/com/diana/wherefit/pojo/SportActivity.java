@@ -7,7 +7,8 @@ import java.util.Locale;
 
 public class SportActivity implements Serializable {
 
-    private static final String FORMAT = "kk:mm";
+    private static final String HOUR_FORMAT = "kk:mm";
+    private static final String DATE_FORMAT = "E";
 
     private String name;
     private int placeId;
@@ -43,12 +44,16 @@ public class SportActivity implements Serializable {
         return startTime;
     }
 
-    public String getHeader() {
-        return getHour(startTime) + " - " + getHour(endTime) + " " + getName();
+    public String getHeader(Locale locale) {
+        return getDate(startTime, locale) + " " + getHour(startTime) + " - " + getHour(endTime) + " " + getName();
     }
 
     private String getHour(long time) {
-        return new SimpleDateFormat(FORMAT, Locale.getDefault()).format(new Date(time));
+        return new SimpleDateFormat(HOUR_FORMAT, Locale.getDefault()).format(new Date(time));
+    }
+    
+    private String getDate(long time, Locale locale) {
+        return new SimpleDateFormat(DATE_FORMAT, locale).format(new Date(time));
     }
 
     public String getType() {

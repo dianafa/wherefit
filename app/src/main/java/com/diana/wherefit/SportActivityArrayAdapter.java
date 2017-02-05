@@ -12,6 +12,7 @@ import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.SportActivity;
 
 import java.util.List;
+import java.util.Locale;
 
 class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
 
@@ -30,12 +31,16 @@ class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
         TextView text2 = (TextView) view.findViewById(android.R.id.text2);
         SportActivity activity = getItem(position);
         if (activity != null) {
-            text1.setText(activity.getHeader());
+            text1.setText(activity.getHeader(getLocale()));
             Place place = service.getPlace(activity.getPlaceId());
             if (place != null) {
                 text2.setText(place.getName());
             }
         }
         return view;
+    }
+
+    private Locale getLocale() {
+        return getContext().getResources().getConfiguration().locale;
     }
 }
