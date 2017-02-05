@@ -1,6 +1,8 @@
 package com.diana.wherefit;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -28,12 +30,27 @@ public class SportActivityItemClickListener implements OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SportActivity activity = (SportActivity) listView.getItemAtPosition(position);
+        final Place place = service.getPlace(activity.getPlaceId());
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
-        Place place = service.getPlace(activity.getPlaceId());
+        builder.setPositiveButton("Nawiguj", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                if (place != null) {
+                    navigateTo(place.getLocation());
+                }
+            }
+        });
+        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Dialog closes
+            }
+        });
 
-        if (place != null) {
-            navigateTo(place.getLocation());
-        }
+        builder.setMessage(activity.getDescription())
+                .setTitle(activity.getName());
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void navigateTo(Location l) {
