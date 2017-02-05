@@ -51,8 +51,8 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
         List<SportActivity> nearbyActivities = new ArrayList<>();
         List<Place> places = getPlaces(location, dist);
         for (SportActivityApi api : apis) {
-            for (SportActivity activity : api.getActivitiesFromType(from, to, types)) {
-                if (isInPlaceNearby(activity, places)) {
+            for (SportActivity activity : api.getActivities(from, to)) {
+                if (isInPlaceNearby(activity, places) && isInType(activity, types)) {
                     nearbyActivities.add(activity);
                 }
             }
@@ -116,5 +116,9 @@ public class SportActivitiesServiceImpl implements SportActivitiesService {
             }
         }
         return result;
+    }
+
+    private boolean isInType(SportActivity activity, ArrayList<String> types) {
+        return types.contains(activity.getType());
     }
 }

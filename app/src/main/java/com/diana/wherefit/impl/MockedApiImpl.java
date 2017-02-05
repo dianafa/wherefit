@@ -35,11 +35,6 @@ public class MockedApiImpl implements SportActivityApi {
     }
 
     @Override
-    public Collection<SportActivity> getActivitiesFromType(long from, long to, ArrayList<String> types) {
-        return activities.getActivities();
-    }
-
-    @Override
     public Collection<Place> getPlaces() {
         return places.getPlaces();
     }

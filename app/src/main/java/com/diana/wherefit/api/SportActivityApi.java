@@ -10,7 +10,5 @@ public interface SportActivityApi {
 
     Collection<SportActivity> getActivities(long from, long to);
 
-    Collection<SportActivity> getActivitiesFromType(long from, long to, ArrayList<String> types);
-
     Collection<Place> getPlaces();
 }

@@ -84,24 +84,6 @@ public class FabrykaFormyApi implements SportActivityApi {
     }
 
     @Override
-    public Collection<SportActivity> getActivitiesFromType(long from, long to, ArrayList<String> types) {
-        Elements daysElements = doc.select(".tt_timetable ul.tt_items_list");
-        Collection<SportActivity> activities = new ArrayList<>();
-
-        for (int i = 0; i < daysElements.size(); i++) {
-            Elements activitiesDom = daysElements.get(i).select("li");
-            for (Element activityElement: activitiesDom) {
-                SportActivity activity = createSportActivityFromElement(activityElement, i);
-                if (activity.getStartTime() > from && activity.getEndTime() < to && types.contains(activity.getType())) {
-                    activities.add(activity);
-                }
-            }
-        }
-
-        return activities;
-    }
-
-    @Override
     public Collection<Place> getPlaces() {
         ArrayList<Place> places = new ArrayList<>();
 

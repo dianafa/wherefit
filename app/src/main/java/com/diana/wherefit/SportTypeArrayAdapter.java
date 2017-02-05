@@ -12,12 +12,8 @@ package com.diana.wherefit;
         import java.util.List;
 
 class SportTypeArrayAdapter extends ArrayAdapter<String> {
-
-    //private final SportActivitiesService service;
-
     SportTypeArrayAdapter(Context context, List<String> types, SportActivitiesService service) {
         super(context, android.R.layout.simple_list_item_multiple_choice, android.R.id.text1, types);
-        //this.service = service;
     }
 
     @NonNull

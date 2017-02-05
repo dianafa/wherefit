@@ -1,13 +1,11 @@
 package com.diana.wherefit;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.view.View.OnClickListener;
 
@@ -37,7 +35,6 @@ public class TypeListActivity extends AppCompatActivity implements OnClickListen
         button.setOnClickListener(this);
         adapter = new SportTypeArrayAdapter(this, service.getTypes(now.getTimeInMillis(), to.getTimeInMillis()), service);
         listView.setAdapter(adapter);
-        //listView.setOnItemClickListener(new SportActivityItemClickListener(this, listView, service));
     }
 
     private void showAllFromTypes(ArrayList<String> selectedTypes) {
