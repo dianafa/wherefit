@@ -33,15 +33,26 @@ class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
 
         SportActivity activity = getItem(position);
         if (activity != null) {
-            String hex = Integer.toHexString(activity.getDay() * 2);
-            view.setBackgroundColor(Color.parseColor("#D0" + "9" + hex + hex + "F" + hex + "F"));
-
-            text1.setText(activity.getHeader());
             Place place = service.getPlace(activity.getPlaceId());
+
+            view.setBackgroundColor(Color.parseColor(getColorFromActivity(activity)));
+            text1.setText(activity.getHeader());
             if (place != null) {
                 text2.setText(place.getName());
             }
         }
+
         return view;
+    }
+
+    /**
+     * @param activity SportActivity
+     * @return string in form of #RRGGBB or #AARRGGBB
+     */
+    private String getColorFromActivity(SportActivity activity) {
+        String hex = Integer.toHexString(activity.getDay() * 2);
+
+        return "#D09" + hex + hex + "F" + hex + "F";
+
     }
 }
