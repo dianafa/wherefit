@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.text.Html;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -46,7 +47,7 @@ public class SportActivityItemClickListener implements OnItemClickListener {
             }
         });
 
-        builder.setMessage(activity.getDescription())
+        builder.setMessage(Html.fromHtml(activity.getDescription()))
                 .setTitle(activity.getName());
 
         AlertDialog dialog = builder.create();

@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override public void onLoaderReset(Loader<FabrykaFormyApi> loader) {
-                        activitiesService.addApi(new FabrykaFormyApi());
-                        //activitiesService.addApi(new MockedApiImpl(this));
+                        activitiesService.addApi(new FabrykaFormyApi("app/src/test/resources/FabrykaFormyPage.html"));
                         apisLoaded = true;
                     }
                 }
