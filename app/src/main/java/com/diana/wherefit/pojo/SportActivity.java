@@ -9,7 +9,7 @@ import java.util.Locale;
 public class SportActivity implements Serializable {
 
     private static final String HOUR_FORMAT = "kk:mm";
-    //private static final String DATE_FORMAT = "E";
+    private static final String DATE_FORMAT = "dd.MM.yy";
     private String name;
     private int placeId;
     private long startTime;
@@ -51,11 +51,19 @@ public class SportActivity implements Serializable {
     private String getHour(long time) {
         return new SimpleDateFormat(HOUR_FORMAT, Locale.getDefault()).format(new Date(time));
     }
+
+    private String getDate(long time) {
+        return new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(new Date(time));
+    }
     
     public Integer getDay() {
         Calendar day = Calendar.getInstance();
         day.setTimeInMillis(startTime);
         return day.get(Calendar.DAY_OF_WEEK);
+    }
+
+    public String getDialogTitle() {
+        return getDate(startTime) + " " + getName();
     }
 
     public String getType() {

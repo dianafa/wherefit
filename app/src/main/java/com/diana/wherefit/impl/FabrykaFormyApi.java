@@ -84,11 +84,16 @@ public class FabrykaFormyApi implements SportActivityApi {
         Elements daysElements = doc.select(".tt_timetable.small ul.tt_items_list");
         Collection<SportActivity> activities = new ArrayList<>();
 
-        for (int i = 0; i < 7 && i < activities.size(); i++) {
+        for (int i = 0; i < 7; i++) {
             Elements activitiesElements = daysElements.get(i).select("li");
+            int calendarWeekday = (i + 2) % 8; // Calendar.DAY_OF_WEEK returns values 1-7 where 1 is Sunday
+            System.out.println("Weekday: " + calendarWeekday);
+
             for (Element activityElement: activitiesElements) {
-                int calendarWeekday = (i + 1) % 7 + 1; // Calendar.DAY_OF_WEEK returns values 1-7 where 1 is Sunday
                 SportActivity activity = createSportActivityFromElement(activityElement, calendarWeekday, doc);
+
+                System.out.println("Date: " + activity.getDialogTitle() + "Time: " + activity.getHeader());
+
 
                 if (activity.getStartTime() > from && activity.getEndTime() < to) {
                     activities.add(activity);

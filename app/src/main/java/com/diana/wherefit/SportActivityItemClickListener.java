@@ -48,7 +48,7 @@ public class SportActivityItemClickListener implements OnItemClickListener {
         });
 
         builder.setMessage(Html.fromHtml(activity.getDescription()))
-                .setTitle(activity.getName());
+                .setTitle(activity.getDialogTitle());
 
         AlertDialog dialog = builder.create();
         dialog.show();
