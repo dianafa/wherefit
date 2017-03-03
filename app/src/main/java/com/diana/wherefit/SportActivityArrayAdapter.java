@@ -13,7 +13,6 @@ import com.diana.wherefit.pojo.Place;
 import com.diana.wherefit.pojo.SportActivity;
 
 import java.util.List;
-import java.util.Locale;
 
 class SportActivityArrayAdapter extends ArrayAdapter<SportActivity> {
 
